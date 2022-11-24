@@ -16,11 +16,20 @@ class BaseModel:
     Class containing key methods and attributes to be extended
     by all model classes
     """
-    def __init__(self):
-        """Create instance attributes"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """Create instance attribue"""
+        if kwargs is not None and len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key == 'created_at' or key == 'updated_at':
+                        setattr(self, key, datetime.strptime(
+                                value, "%Y-%m-%dT%H:%M:%S.%f"))
+                    else:
+                        setattr(self, key, value)
+        else:                
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """Return a string representation of the BaseModel object"""
