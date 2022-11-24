@@ -1,7 +1,9 @@
 #!/usr/bib/python3
 
+
 """
-File storage - contains file storage class
+File storage - create a class that saves to the a json file
+and reads from it
 
 """
 import json
@@ -9,34 +11,33 @@ from models.base_model import BaseModel
 
 
 class FileStorage:
-    """Store the objects to a file for persistance"""
+    """Create a file storage class"""
 
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """Return the dictionary object"""
+        """Return all objects created and saved"""
         return FileStorage.__objects
 
     def new(self, obj):
-        """Add object to the array of objects"""
-        if obj not isinstance(obj, BaseModel):
+        """Add a new object to the object dictionary"""
+            if not isinstance(obj, BaseModel):
                 return
-        FileStorage.__objects["{obj.__class__.__name__}.{obj.id}"] = obj
+            FileStorage.__objects["{self.__class__.__name__}.{self.id}"] = obj
 
     def save(self):
-        """Serialize the __objects into a json"""
+        """Serialize objects to json file"""
         try:
-            with open(__file_path, 'w', encoding="utf-78") as f:
-                json.dump(__objects, __file_path)
-        except:
+            with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
+                json.dump(FileStorage.__objects, f)
+        except FileNotFoundError:
             return
 
     def reload(self):
-        """Deserialize the json file"""
+        """Deserialize a json object from a file into a dictionary"""
         try:
-            with open(__file_path) as f:
+            with open(FileStorage.__file_path) as f:
                 FileStorage.__objects = json.load(f)
-        except:
+        except FileNotFoundError:
             return
-
