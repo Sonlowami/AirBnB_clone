@@ -1,0 +1,1 @@
+{"{self.__class__.__name__}.{self.id}": {"id": "0ae9910e-9ef3-4224-b654-5bb06550586a", "created_at": "2022-11-25T00:05:58.790968", "updated_at": "2022-11-25T00:05:58.792970", "name": "My_First_Model", "my_number": 89, "__class__": "BaseModel"}}

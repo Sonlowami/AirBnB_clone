@@ -1,12 +1,11 @@
 #!/usr/bib/python3
-
-
 """
 File storage - create a class that saves to the a json file
 and reads from it
 
 """
 import json
+import os.path
 from models.base_model import BaseModel
 
 
@@ -22,22 +21,25 @@ class FileStorage:
 
     def new(self, obj):
         """Add a new object to the object dictionary"""
-            if not isinstance(obj, BaseModel):
-                return
-            FileStorage.__objects["{self.__class__.__name__}.{self.id}"] = obj
+        if not isinstance(obj, BaseModel):
+            return
+        FileStorage.__objects["{self.__class__.__name__}.{self.id}"] = obj
 
     def save(self):
         """Serialize objects to json file"""
-        try:
-            with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
-                json.dump(FileStorage.__objects, f)
-        except FileNotFoundError:
-            return
+        with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
+            dic = {}
+            for key, obj in FileStorage.__objects.items():
+                dic[key] = obj.to_dict()
+            json.dump(dic, f)
 
     def reload(self):
         """Deserialize a json object from a file into a dictionary"""
-        try:
+        if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path) as f:
-                FileStorage.__objects = json.load(f)
-        except FileNotFoundError:
-            return
+                rd = f.read()
+                if rd:
+                    for key, obj in json.loads(rd).items():
+                        if key == '__class__':
+                            continue
+                        FileStorage.__objects[key] = obj

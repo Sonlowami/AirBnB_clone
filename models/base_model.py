@@ -8,7 +8,7 @@ other model classes will extend.
 """
 from datetime import datetime
 from uuid import uuid4
-from models import storage
+import models
 
 
 class BaseModel:
@@ -30,6 +30,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """Return a string representation of the BaseModel object"""
@@ -38,7 +39,7 @@ class BaseModel:
     def save(self):
         """Make a change to an object and update it"""
         self.updated_at = datetime.now()
-        storage.save(self)
+        models.storage.save()
 
     def to_dict(self):
         """
