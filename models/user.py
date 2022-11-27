@@ -1,10 +1,9 @@
 #!usr/bin/python3
-
 """
-
 Ïnherites from Basemodel
 """
 from models.base_model import BaseModel
+
 
 class User(BaseModel):
     """

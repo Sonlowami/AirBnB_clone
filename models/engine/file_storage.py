@@ -20,7 +20,10 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
-    classes = {"BaseModel" : BaseModel, "User" : User, "State" : State, "City" : City, "Amenity" : Amenity, "Place" : Place, "Review" : Review}
+    classes = {"BaseModel": BaseModel, "User": User, "State": State,
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
+
     def all(self):
         """Return all objects created and saved"""
         return self.__objects
