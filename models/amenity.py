@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """
-
 Inherites from BaseModel
 """
 from models.base_model import BaseModel
 
-class Amenity(Basemodel):
+
+class Amenity(BaseModel):
     """
     Class Amenity
     """
