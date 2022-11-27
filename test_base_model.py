@@ -1,24 +1,40 @@
 #!/usr/bin/python3
+"""
+BaseModel Class Test
+"""
+import unittest
 from models.base_model import BaseModel
+from datetime import datetime
 
-my_model = BaseModel()
-my_model.name = "My_First_Model"
-my_model.my_number = 89
-print(my_model.id)
-print(my_model)
-print(type(my_model.created_at))
-print("--")
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+class TestBaseModel(unittest.TestCase):
+    """
+    Test for BaseModel Class Methods
+    """
+    @classmethod
+    def setup(cls):
+        """set up an object for test"""
+        cls.objct = BaseModel()
 
-print("--")
-my_new_model = BaseModel(**my_model_json)
-print(my_new_model.id)
-print(my_new_model)
-print(type(my_new_model.created_at))
+    @classmethod
+    def teardown(cls):
+        """Delete the object at the end of test"""
+        del cls.objct
 
-print("--")
-print(my_model is my_new_model)
+    def test_str(self):
+        """Test if ___str__ show the right output"""
+        string = "[{BaseModel}] ({}) {}".format(self.objct.id, self.objct.__dict__)
+        self.assertEqual(string, str(self.objct))
+
+    def test_save(self):
+        """Test if updates are made when changes occur"""
+        self.assertNotEqual(self.objct.created_at, self.objct.updated_at)
+
+    def test_to_dict(self):
+        """"Test if updated_at and created_at changed their format
+            Test if key __clas__ has a value BaseModel"""
+        self.object_dict = self.object.to_dict()
+        self.assertEqual(self.objct_dict['updated_at'], self.object.updated_at.isoformat())
+        self.assertEqual(self.objct_dict['created_at'], self.object.created_at.isoformat())
+        self.assertEqual(self.object.__class__.name, 'BaseModel')
+if __name__ == '__main__':
+    unittest.main()
