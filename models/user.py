@@ -4,11 +4,10 @@
 
 Ïnherites from Basemodel
 """
-from models.base_model import basemodel
+from models.base_model import BaseModel
 
-class user(BaseModel):
+class User(BaseModel):
     """
-
     Class user
     """
     email = ""
