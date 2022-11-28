@@ -11,14 +11,14 @@ class TestBaseModel(unittest.TestCase):
     Test for BaseModel Class Methods
     """
     @classmethod
-    def setup(cls):
+    def setUp(cls):
         """set up an object for test"""
         cls.my_model = BaseModel()
         cls.my_model.name = "Holberton"
         cls.my_model.my_number = 89
 
     @classmethod
-    def teardown(cls):
+    def tearDown(cls):
         """Delete the object at the end of test"""
         del cls.my_model
 
