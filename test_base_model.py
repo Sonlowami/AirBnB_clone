@@ -13,17 +13,19 @@ class TestBaseModel(unittest.TestCase):
     @classmethod
     def setup(cls):
         """set up an object for test"""
-        cls.objct = BaseModel()
+        cls.my_model = BaseModel()
+        cls.my_model.name = "Holberton"
+        cls.my_model.my_number = 89
 
     @classmethod
     def teardown(cls):
         """Delete the object at the end of test"""
-        del cls.objct
+        del cls.my_model
 
     def test_str(self):
         """Test if ___str__ show the right output"""
-        string = "[{BaseModel}] ({}) {}".format(self.objct.id, self.objct.__dict__)
-        self.assertEqual(string, str(self.objct))
+        string = "[BaseModel] ({}) {}".format(self.my_model.id, self.my_model.__dict__)
+        self.assertEqual(string, str(self.my_model))
 
     def test_save(self):
         """Test if updates are made when changes occur"""
