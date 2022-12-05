@@ -1,0 +1,14 @@
+* {
+	margin: 0px;
+	padding:0px;
+	font: 14px #484848 Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.container {
+	display: flex;
+	margin: auto;
+	max-width: 1000px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	justify-content: center;
+	align-items: center;
+}
